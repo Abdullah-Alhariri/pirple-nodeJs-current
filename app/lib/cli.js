@@ -14,6 +14,67 @@ const e = new _events();
 // Instantiate the CLI module object
 const cli = {};
 
+e.on("man", function (str) {
+  cli.responders.help();
+});
+e.on("help", function (str) {
+  cli.responders.help();
+});
+e.on("exit", function (str) {
+  cli.responders.exit();
+});
+e.on("stats", function (str) {
+  cli.responders.stats();
+});
+e.on("list users", function (str) {
+  cli.responders.listUsers();
+});
+e.on("more user info", function (str) {
+  cli.responders.moreUserInfo(str);
+});
+e.on("list checks", function (str) {
+  cli.responders.listChecks(str);
+});
+e.on("more check info", function (str) {
+  cli.responders.moreCheckInfo(str);
+});
+e.on("list logs", function () {
+  cli.responders.listLogs();
+});
+e.on("more log info", function (str) {
+  cli.responders.moreLogInfo(str);
+});
+
+// Responders object
+cli.responders = {};
+cli.responders.help = function () {
+  console.log("You asked for help");
+};
+cli.responders.exit = function () {
+  process.exit(0);
+};
+cli.responders.stats = function () {
+  console.log("You asked for stats");
+};
+cli.responders.listUsers = function () {
+  console.log("You asked to list users");
+};
+cli.responders.moreUserInfo = function (str) {
+  console.log("You asked for more user info", str);
+};
+cli.responders.listChecks = function () {
+  console.log("You asked to list checks");
+};
+cli.responders.moreCheckInfo = function (str) {
+  console.log("You asked for more check info", str);
+};
+cli.responders.listLogs = function () {
+  console.log("You asked to list logs");
+};
+cli.responders.moreLogInfo = function (str) {
+  console.log("You asked for more log info", str);
+};
+
 // Input processor
 cli.procesInput = function (str) {
   str = typeof str == "string" && str.trim().length > 0 ? str.trim() : false;
@@ -34,7 +95,19 @@ cli.procesInput = function (str) {
     ];
 
     // Go throught the possible inputs, emit an event when a match is found
-    const matchFound = false;
+    let matchFound = false;
+    let counter = 0;
+    uniqueInput.some(function (input) {
+      if (str.toLowerCase().indexOf(input) > -1) {
+        matchFound = true;
+
+        e.emit(input, str);
+        return true;
+      }
+    });
+    if (!matchFound) {
+      console.log("Sorry try again");
+    }
   }
 };
 
