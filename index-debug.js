@@ -4,17 +4,16 @@
  */
 
 // Dependencies
-var server = require('./lib/server');
-var workers = require('./lib/workers');
-var exampleDebuggingProblem = require('./lib/exampleDebuggingProblem');
-var cli = require('./lib/cli');
+var server = require("./lib/server");
+var workers = require("./lib/workers");
+var exampleDebuggingProblem = require("./lib/exampleDebuggingProblem");
+var cli = require("./lib/cli");
 
 // Declare the app
 var app = {};
 
 // Init function
-app.init = function(){
-
+app.init = function () {
   // Start the server
   debugger;
   server.init();
@@ -27,10 +26,10 @@ app.init = function(){
 
   // Start the CLI, but make sure it starts last
   debugger;
-  setTimeout(function(){
+  setTimeout(function () {
     cli.init();
     debugger;
-  },50);
+  }, 50);
   debugger;
 
   // Start an example script that has issues (throws an error)
@@ -58,12 +57,10 @@ app.init = function(){
   // Call the init script that will throw
   exampleDebuggingProblem.init();
   debugger;
-
 };
 
 // Self executing
 app.init();
-
 
 // Export the app
 module.exports = app;
