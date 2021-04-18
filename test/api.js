@@ -26,6 +26,7 @@ helpers.makeGetRequest = function (path, callback) {
       "Content-Type": "application/json",
     },
   };
+
   // Send the request
   var req = http.request(requestDetails, function (res) {
     callback(res);

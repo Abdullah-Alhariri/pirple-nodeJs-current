@@ -26,8 +26,10 @@ app.init = function (callback) {
   }, 50);
 };
 
-// Self ivoking only if required directly
-if (require.main === module) app.init(function () {});
+// Self invoking only if required directly
+if (require.main === module) {
+  app.init(function () {});
+}
 
 // Export the app
 module.exports = app;
