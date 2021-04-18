@@ -11,6 +11,9 @@ var cli = require('./lib/cli');
 // Declare the app
 var app = {};
 
+// Declaring a global (strict should catch this mistake)
+foo = 'bar';
+
 // Init function
 app.init = function(){
 
