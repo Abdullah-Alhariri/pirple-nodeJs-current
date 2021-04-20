@@ -10,12 +10,17 @@ var cli = require("./lib/cli");
 var cluster = require("cluster");
 var os = require("os");
 
+// Declare the app
 var app = {};
 
+// Init function
 app.init = function (callback) {
+  // If we're on the master thread, start the background workers and the CLI
   if (cluster.isMaster) {
+    // Start the workers
     workers.init();
 
+    // Start the CLI, but make sure it starts last
     setTimeout(function () {
       cli.init();
       callback();
@@ -26,6 +31,7 @@ app.init = function (callback) {
       cluster.fork();
     }
   } else {
+    // If we're not on the master thread, start the HTTP server
     server.init();
   }
 };
@@ -35,4 +41,5 @@ if (require.main === module) {
   app.init(function () {});
 }
 
+// Export the app
 module.exports = app;
