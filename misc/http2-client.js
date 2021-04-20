@@ -5,24 +5,24 @@
  */
 
 // Dependencies
-var http2 = require('http2');
+var http2 = require("http2");
 
 // Create client
-var client = http2.connect('http://localhost:6000');
+var client = http2.connect("http://localhost:6000");
 
 // Create a request
 var req = client.request({
-  ':path': '/'
+  ":path": "/",
 });
 
 // When message is received, add the pieces of it together until you reach the end
-var str = '';
-req.on('data',function(chunk){
+var str = "";
+req.on("data", function (chunk) {
   str += chunk;
 });
 
 // When a message ends, log it out
-req.on('end', function(){
+req.on("end", function () {
   console.log(str);
 });
 

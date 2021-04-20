@@ -5,17 +5,17 @@
  */
 
 // Dependencies
-var repl = require('repl');
+var repl = require("repl");
 
 // Start the REPL
 repl.start({
-  prompt: '>',
-  eval: function(str){
+  prompt: ">",
+  eval: function (str) {
     // Evaluation function for incoming inputs
-    console.log("AT THE EVAL",str);
+    console.log("AT THE EVAL", str);
     // If the user said 'fizz', say 'buzz' back to them
-    if(str.indexOf('fizz') > -1){
-      console.log('buzz');
+    if (str.indexOf("fizz") > -1) {
+      console.log("buzz");
     }
   },
 });
